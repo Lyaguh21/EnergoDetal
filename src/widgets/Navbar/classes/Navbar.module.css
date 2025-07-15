@@ -1,0 +1,8 @@
+.borderB {
+  border-bottom: 1px solid #4e535d;
+  border-collapse: collapse;
+}
+.borderR {
+  border-right: 1px solid #4e535d;
+  border-collapse: collapse;
+}

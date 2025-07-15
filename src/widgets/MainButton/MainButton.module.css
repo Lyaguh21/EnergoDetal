@@ -1,0 +1,11 @@
+.MainButton {
+  font-weight: 500;
+  font-size: 22px;
+  background-color: black;
+  transition: 300ms;
+}
+.MainButton:hover {
+  background-color: rgba(255, 255, 255, 0);
+  border: 1px solid black;
+  color: black;
+}
