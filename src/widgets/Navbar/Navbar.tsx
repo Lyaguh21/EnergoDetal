@@ -2,13 +2,17 @@ import { Box, Button, Flex, Text } from "@mantine/core";
 import classes from "./classes/Navbar.module.css";
 import { Link } from "../Link/Link";
 import MainButton from "../MainButton/MainButton";
+import { AnimatePresence, motion } from "motion/react";
+import { useLocation } from "react-router";
 
 export default function Navbar() {
+  const location = useLocation();
+
   const pages = [
     { title: "О компании", link: "/" },
-    { title: "Продукция", link: "/" },
-    { title: "Галерея", link: "/" },
-    { title: "Контакты", link: "/" },
+    { title: "Продукция", link: "/products" },
+    { title: "Галерея", link: "/gallery" },
+    { title: "Контакты", link: "/contacts" },
   ];
 
   return (
@@ -46,14 +50,36 @@ export default function Navbar() {
       <Flex
         p={20}
         justify="center"
-        align="center"
         direction="column"
         className={classes.borderB}
         gap={10}
       >
-        {pages.map((el) => (
-          <Link to={el.link}>{el.title}</Link>
-        ))}
+        <AnimatePresence>
+          {pages.map((el) => (
+            <Flex align="center" gap={10}>
+              {location.pathname === el.link && (
+                <motion.div
+                  style={{
+                    height: "22px",
+                    width: "2px",
+                    backgroundColor: "black",
+                  }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                />
+              )}
+              <Link
+                to={el.link}
+                style={{
+                  color: location.pathname === el.link ? "black" : "#515661",
+                }}
+              >
+                {el.title}
+              </Link>
+            </Flex>
+          ))}
+        </AnimatePresence>
       </Flex>
 
       <Flex p={20} direction="column" align="center">
