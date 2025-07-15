@@ -1,0 +1,9 @@
+.borderB {
+  border-bottom: 1px solid #4e535d;
+  border-collapse: collapse;
+}
+
+.activeBorderB {
+  border-bottom: 1px solid black;
+  border-collapse: collapse;
+}

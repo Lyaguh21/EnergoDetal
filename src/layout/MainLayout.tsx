@@ -6,7 +6,8 @@ export default function MainLayout() {
   return (
     <Flex>
       <Navbar />
-      <Box mih="100vh" pl={320}>
+
+      <Box mih="100vh" pl={320} style={{ flexGrow: 1 }}>
         <Outlet />
       </Box>
     </Flex>
