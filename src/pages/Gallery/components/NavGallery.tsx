@@ -15,6 +15,7 @@ export default function NavGallery({ select, set }: navbar) {
     <Flex className={classes.borderB} w="100%">
       {buttons.map((el) => (
         <Button
+          key={buttons.indexOf(el)}
           fz={20}
           h={60}
           radius={0}

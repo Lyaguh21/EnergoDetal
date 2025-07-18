@@ -56,7 +56,7 @@ export default function Navbar() {
       >
         <AnimatePresence>
           {pages.map((el) => (
-            <Flex align="center" gap={10}>
+            <Flex align="center" gap={10} key={pages.indexOf(el)}>
               {location.pathname === el.link && (
                 <motion.div
                   style={{
