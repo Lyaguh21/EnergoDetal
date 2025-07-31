@@ -83,11 +83,11 @@ export default function Navbar() {
       </Flex>
 
       <Flex p={20} direction="column" align="center">
-        <Text ta="center" fz={24} fw={500} mb={20}>
+        <Text ta="center" fz={24} fw={500} mb={10}>
           Прямой эфир
         </Text>
 
-        <Box bg="blue" w="280px" h="280px"></Box>
+        <Box bg="blue" w="100%" style={{ aspectRatio: "1 / 1" }}></Box>
       </Flex>
     </Box>
   );

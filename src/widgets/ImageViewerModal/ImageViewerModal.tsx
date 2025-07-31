@@ -12,7 +12,7 @@ interface ModalTypes {
   selectPosImage: number;
   setSelectPosImage: Dispatch<SetStateAction<number>>;
   data: Photo[];
-}
+}  
 
 export default function ImageViewerModal({
   opened,

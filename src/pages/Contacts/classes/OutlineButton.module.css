@@ -1,0 +1,14 @@
+.OutlineButton {
+  font-weight: 500;
+  color: black;
+  font-size: 22px;
+  transition: 300ms;
+  outline: black;
+  border: 1px solid black;
+  height: 60px;
+}
+.OutlineButton:hover {
+  background-color: black;
+  border: 1px solid black;
+  color: rgb(255, 255, 255);
+}
