@@ -69,7 +69,7 @@ export default function Gallery() {
   };
 
   return (
-    <Box w="100%" px={100}>
+    <>
       <ImageViewerModal
         close={close}
         opened={opened}
@@ -78,21 +78,24 @@ export default function Gallery() {
         data={data}
       />
 
-      <Text ta="center" fz={90} fw="bold" py={25}>
-        Галерея
-      </Text>
+      
+      <Box w="100%" px={100}>
+        <Text ta="center" fz={90} fw="bold" py={25}>
+          Галерея
+        </Text>
 
-      <NavGallery set={setResponseTypePhoto} select={responseTypePhoto} />
+        <NavGallery set={setResponseTypePhoto} select={responseTypePhoto} />
 
-      <Flex gap={40} p={40} wrap="wrap">
-        {data.map((el) => (
-          <PhotoTemplate
-            key={data.indexOf(el)}
-            link={el.link}
-            onClick={() => handleOpenViewImage(el)}
-          />
-        ))}
-      </Flex>
-    </Box>
+        <Flex gap={40} p={40} wrap="wrap">
+          {data.map((el) => (
+            <PhotoTemplate
+              key={data.indexOf(el)}
+              link={el.link}
+              onClick={() => handleOpenViewImage(el)}
+            />
+          ))}
+        </Flex>
+      </Box>
+    </>
   );
 }
