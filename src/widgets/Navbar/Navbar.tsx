@@ -19,7 +19,12 @@ export default function Navbar() {
     <Box
       w={320}
       className={classes.borderR}
-      style={{ position: "fixed", height: "100vh" }}
+      style={{
+        position: "fixed",
+        height: "100vh",
+        zIndex: "999",
+        backgroundColor: "white",
+      }}
     >
       <Flex p={20} gap={24} align="center" className={classes.borderB}>
         <img src="/LogoEnergoDetal.svg" />
