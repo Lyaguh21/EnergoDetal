@@ -14,7 +14,6 @@ export default function About() {
       <AboutCompanySection />
       <BuyersSection />
       <ScrollRightSection />
-
       <MapSection />
     </Box>
   );

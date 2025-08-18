@@ -14,7 +14,7 @@ const CardTemplate = ({
   return (
     <Box
       px={10}
-      miw="50%"
+      w={"calc(50% - 30px)"}
       style={{ border: "1px solid black", borderRadius: "5px" }}
     >
       <Flex justify="center" py={25}>
@@ -32,22 +32,11 @@ const CardTemplate = ({
 
 export default function ScrollRightSection() {
   return (
-    <Box maw="76vw">
+    <Box>
       <Text ta="center" mt={60} fz={60} fw="bold" lh="h1" c="black">
         Производственные возможности
       </Text>
-      <Flex
-        w="100%"
-        px={50}
-        py={112}
-        gap={30}
-        style={{
-          overflowX: "scroll",
-          overflowY: "hidden",
-          scrollbarWidth: "none", // Для Firefox
-          msOverflowStyle: "none", // Для Internet Explorer и Edge (старый)
-        }}
-      >
+      <Flex w="100%" px={50} py={40} gap={30} style={{ flexWrap: "wrap" }}>
         {card.map((el) => (
           <CardTemplate text={el.text} title={el.title} img={el.img} />
         ))}
@@ -65,26 +54,20 @@ const card = [
   },
   {
     id: 2,
-    img: "SvarochnieRaboti.svg",
-    title: "Сварочные работы",
-    text: "Современное сварочное оборудование и квалифицированные специалисты",
+    img: "Mehanoobrabotka.svg",
+    title: "Механообработка",
+    text: "Токарные и фрезерные станки с ЧПУ",
   },
   {
     id: 3,
-    img: "SvarochnieRaboti.svg",
-    title: "Сварочные работы",
-    text: "Современное сварочное оборудование и квалифицированные специалисты",
+    img: "Controll.svg",
+    title: "Контроль качества",
+    text: "Многоступенчатый контроль качества производства и транспортировки",
   },
   {
     id: 4,
-    img: "SvarochnieRaboti.svg",
-    title: "Сварочные работы",
-    text: "Современное сварочное оборудование и квалифицированные специалисты",
-  },
-  {
-    id: 5,
-    img: "SvarochnieRaboti.svg",
-    title: "Сварочные работы",
-    text: "Современное сварочное оборудование и квалифицированные специалисты",
+    img: "Logistika.svg",
+    title: "Логистика",
+    text: "Собственный автопарк и налаженные маршруты для быстрой доставки",
   },
 ];
