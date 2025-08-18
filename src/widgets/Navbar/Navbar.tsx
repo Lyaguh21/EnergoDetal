@@ -22,7 +22,7 @@ export default function Navbar() {
       style={{
         position: "fixed",
         height: "100vh",
-        zIndex: "999",
+        zIndex: "10",
         backgroundColor: "white",
       }}
     >

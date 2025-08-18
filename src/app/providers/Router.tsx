@@ -5,6 +5,7 @@ import Error404 from "../../pages/Errors/Error404.page";
 import Products from "../../pages/Products/Products.page";
 import Gallery from "../../pages/Gallery/Gallery.page";
 import Contacts from "../../pages/Contacts/Contacts.page";
+import ExecutionProduct from "../../pages/Products/ExecutionProduct.page";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: "/products",
         element: <Products />,
+      },
+      {
+        path: "/products/:BlueprintId",
+        element: <ExecutionProduct />,
       },
       {
         path: "/gallery",
