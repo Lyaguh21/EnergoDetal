@@ -21,6 +21,7 @@ export default function Contacts() {
         <Flex
           wrap={{ base: "wrap", xl: "nowrap" }}
           gap={{ base: "24px", xl: 0 }}
+          pb={25}
         >
           <Flex direction="column" w="50%" gap={24}>
             <Flex direction="column">

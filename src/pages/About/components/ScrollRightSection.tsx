@@ -36,7 +36,14 @@ export default function ScrollRightSection() {
       <Text ta="center" mt={60} fz={60} fw="bold" lh="h1" c="black">
         Производственные возможности
       </Text>
-      <Flex w="100%" px={50} py={40} gap={30} style={{ flexWrap: "wrap" }}>
+      <Flex
+        w="100%"
+        px={50}
+        py={40}
+        gap={30}
+        justify="center"
+        style={{ flexWrap: "wrap" }}
+      >
         {card.map((el) => (
           <CardTemplate text={el.text} title={el.title} img={el.img} />
         ))}
