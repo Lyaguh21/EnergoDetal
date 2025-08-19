@@ -1,13 +1,13 @@
 import { Center, Flex, Text } from "@mantine/core";
+import MainBigText from "../../../widgets/Texts/MainBigText";
 export default function ProductionSection() {
   return (
     <Center
+      px={{ base: 20, md: 100 }}
       style={{
         position: "relative",
         height: "950px",
         overflow: "hidden",
-        paddingLeft: 100,
-        paddingRight: 100,
       }}
     >
       <div
@@ -34,11 +34,11 @@ export default function ProductionSection() {
           maxWidth: "664px",
         }}
       />
-      <Flex direction="column" gap={80} style={{ zIndex: 3 }}>
-        <Text ta="center" fz={90} fw="bold" lh="h1" c="white">
+      <Flex direction="column" gap={{ base: 20, md: 80 }} style={{ zIndex: 3 }}>
+        <MainBigText c="white" fz={{ base: 40, md: 90 }}>
           Производство
-        </Text>
-        <Text ta="center" c="white" fz={42} fw="normal">
+        </MainBigText>
+        <Text ta="center" c="white" fz={{ base: 30, sm: 42 }} fw="normal">
           Выполнение работы проходит несколько этапов проверки
           <span
             style={{

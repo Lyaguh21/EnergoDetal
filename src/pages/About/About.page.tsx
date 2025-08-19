@@ -3,8 +3,8 @@ import BuyersSection from "./components/BuyersSection";
 import AboutCompanySection from "./components/AboutCompanySection";
 import ProductionSection from "./components/ProductionSection";
 import FirstSection from "./components/FirstSection";
-import ScrollRightSection from "./components/ScrollRightSection";
 import MapSection from "./components/MapSection";
+import ProductionСapabilitiesSection from "./components/ProductionСapabilitiesSection";
 
 export default function About() {
   return (
@@ -13,7 +13,7 @@ export default function About() {
       <ProductionSection />
       <AboutCompanySection />
       <BuyersSection />
-      <ScrollRightSection />
+      <ProductionСapabilitiesSection />
       <MapSection />
     </Box>
   );

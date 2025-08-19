@@ -16,13 +16,15 @@ export default function NavGallery({ select, set }: navbar) {
       {buttons.map((el) => (
         <Button
           key={buttons.indexOf(el)}
-          fz={20}
+          fz={{ base: 14, xs: 20 }}
           h={60}
           radius={0}
+          px={{ base: 1, xs: 18 }}
           variant="transparent"
           c={select === el.type ? "dark" : "#515661"}
           className={select === el.type ? classes.activeBorderB : ""}
           onClick={() => set(el.type)}
+          w="33.33%"
         >
           {el.title}
         </Button>

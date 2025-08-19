@@ -5,6 +5,7 @@ import PhotoTemplate from "./components/PhotoTemplate";
 import { useDisclosure } from "@mantine/hooks";
 import ImageViewerModal from "../../widgets/ImageViewerModal/ImageViewerModal";
 import { Photo } from "../../entities/Photo.interface";
+import MainBigText from "../../widgets/Texts/MainBigText";
 
 export default function Gallery() {
   const [responseTypePhoto, setResponseTypePhoto] =
@@ -78,15 +79,17 @@ export default function Gallery() {
         data={data}
       />
 
-      
-      <Box w="100%" px={100}>
-        <Text ta="center" fz={90} fw="bold" py={25}>
-          Галерея
-        </Text>
+      <Box w="100%" px={{ base: 20, md: 100 }}>
+        <MainBigText>Галерея</MainBigText>
 
         <NavGallery set={setResponseTypePhoto} select={responseTypePhoto} />
 
-        <Flex gap={40} p={40} wrap="wrap">
+        <Flex
+          gap={{ base: 20, md: 40 }}
+          p={{ base: 0, md: 40 }}
+          py={{ base: 10, md: 40 }}
+          wrap="wrap"
+        >
           {data.map((el) => (
             <PhotoTemplate
               key={data.indexOf(el)}

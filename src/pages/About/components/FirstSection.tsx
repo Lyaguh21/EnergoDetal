@@ -1,11 +1,12 @@
 import { Box, Text } from "@mantine/core";
+import MainBigText from "../../../widgets/Texts/MainBigText";
 export default function FirstSection() {
   return (
-    <Box px={100} py={75}>
-      <Text ta="center" fz={90} fw="bold" lh="h1" pb={10}>
+    <Box px={{ base: 20, md: 100 }} py={75}>
+      <MainBigText pt={0} pb={10} fz={{ base: 40, md: 90 }}>
         Производство опор трубопроводов
-      </Text>
-      <Text ta="center" c="#4E535D" fz={32} fw="normal">
+      </MainBigText>
+      <Text ta="center" c="#4E535D" fz={{ base: 20, sm: 32 }} fw="normal">
         Профессиональное изготовление опор трубопроводов по чертежам и
         техническим требованиям. Высокое качество, соблюдение сроков,
         конкурентные цены.

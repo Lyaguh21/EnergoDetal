@@ -4,6 +4,7 @@ import classes from "./classes/OutlineButton.module.css";
 import { useDisclosure } from "@mantine/hooks";
 import RequisitesModal from "./components/RequisitesModal";
 import DeliveryModal from "./components/DeliveryModal";
+import MainBigText from "../../widgets/Texts/MainBigText";
 export default function Contacts() {
   const [openedRequisites, { open: openRequisites, close: closeRequisites }] =
     useDisclosure(false);
@@ -13,17 +14,14 @@ export default function Contacts() {
     <>
       <RequisitesModal opened={openedRequisites} close={closeRequisites} />
       <DeliveryModal opened={openedDelivery} close={closeDelivery} />
-      <Box w="100%" px={100}>
-        <Text ta="center" fz={90} fw="bold" py={25}>
-          Контакты
-        </Text>
-
+      <Box w="100%" px={{ base: 20, md: 100 }}>
+        <MainBigText>Контакты</MainBigText>
         <Flex
           wrap={{ base: "wrap", xl: "nowrap" }}
           gap={{ base: "24px", xl: 0 }}
           pb={25}
         >
-          <Flex direction="column" w="50%" gap={24}>
+          <Flex direction="column" w={{ base: "100%", md: "50%" }} gap={24}>
             <Flex direction="column">
               <Text fz={32} fw="bold">
                 Адрес

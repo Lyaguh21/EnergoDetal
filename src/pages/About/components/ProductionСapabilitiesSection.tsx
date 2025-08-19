@@ -1,6 +1,5 @@
-import { motion } from "motion/react";
-import classes from "../classes/ScrollRightSection.module.css";
 import { Flex, Box, Text } from "@mantine/core";
+import MainBigText from "../../../widgets/Texts/MainBigText";
 
 const CardTemplate = ({
   img,
@@ -14,7 +13,7 @@ const CardTemplate = ({
   return (
     <Box
       px={10}
-      w={"calc(50% - 30px)"}
+      w={{ base: "100%", sm: "calc(50% - 30px)" }}
       style={{ border: "1px solid black", borderRadius: "5px" }}
     >
       <Flex justify="center" py={25}>
@@ -30,15 +29,15 @@ const CardTemplate = ({
   );
 };
 
-export default function ScrollRightSection() {
+export default function ProductionСapabilitiesSection() {
   return (
     <Box>
-      <Text ta="center" mt={60} fz={60} fw="bold" lh="h1" c="black">
+      <MainBigText fz={{ base: 40, md: 90 }}>
         Производственные возможности
-      </Text>
+      </MainBigText>
       <Flex
         w="100%"
-        px={50}
+        px={{ base: 20, md: 50 }}
         py={40}
         gap={30}
         justify="center"

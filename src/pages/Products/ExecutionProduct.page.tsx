@@ -32,10 +32,10 @@ export default function ExecutionProduct() {
   ));
   return (
     <>
-      <Flex px={30} h={90} w="100%" align="center">
+      <Flex px={20} h={90} w="100%" align="center">
         <Breadcrumbs separatorMargin="sm">{items}</Breadcrumbs>
       </Flex>
-      <Box p={30}></Box>
+      <Box p={20}></Box>
     </>
   );
 }

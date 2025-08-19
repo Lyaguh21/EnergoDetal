@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Center, Flex, Text } from "@mantine/core";
+import MainBigText from "../../../widgets/Texts/MainBigText";
 
 const BuyersSection = () => {
   const logos = [
@@ -71,10 +72,13 @@ const BuyersSection = () => {
         }}
       />
 
-      <Flex direction="column" w="100%" gap={80} style={{ zIndex: 3 }}>
-        <Text ta="center" fz={90} fw="bold" lh="h1" c="white">
-          Нас выбирают
-        </Text>
+      <Flex
+        direction="column"
+        w="100%"
+        gap={{ base: 20, md: 80 }}
+        style={{ zIndex: 3 }}
+      >
+        <MainBigText c="white">Нас выбирают</MainBigText>
 
         {/* Контейнер для бегущей строки */}
         <div

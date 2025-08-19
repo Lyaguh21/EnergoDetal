@@ -28,7 +28,7 @@ export default function Navbar({ ref }: { ref: any }) {
         backgroundColor: "white",
       }}
     >
-      <Box w={320} className={classes.borderR} ref={ref}>
+      <Box w={320} h="100vh" className={classes.borderR} ref={ref}>
         <Flex p={20} gap={24} align="center" className={classes.borderB}>
           <img src="/LogoEnergoDetal.svg" />
           <Text fw="bold" fz={28}>

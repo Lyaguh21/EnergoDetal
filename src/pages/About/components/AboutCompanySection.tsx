@@ -1,19 +1,28 @@
 import { Box, Flex, Text } from "@mantine/core";
+import MainBigText from "../../../widgets/Texts/MainBigText";
 
 export default function AboutCompanySection() {
   return (
-    <Box px={100} py={60}>
-      <Flex direction="column" gap={40} style={{ zIndex: 3 }} mb={60}>
-        <Text ta="center" fz={90} fw="bold" lh="h1" c="black">
-          О компании
-        </Text>
+    <Box px={{ base: 20, md: 100 }} py={60}>
+      <Flex
+        direction="column"
+        gap={{ base: 20, md: 40 }}
+        style={{ zIndex: 3 }}
+        mb={60}
+      >
+        <MainBigText>О компании</MainBigText>
         <Text ta="center" c="#4E535D" fz={32} fw="normal">
           Профессиональное изготовление опор трубопроводов по чертежам и
           техническим требованиям. Высокое качество, соблюдение сроков,
           конкурентные цены.
         </Text>
       </Flex>
-      <Flex w="100%" justify="space-between">
+      <Flex
+        w="100%"
+        style={{ flexWrap: "wrap" }}
+        justify={{ base: "center", sm: "space-between" }}
+        direction={{ base: "column", sm: "row" }}
+      >
         <Box>
           <Text ta="center" fz={80} fw="bold" lh="h1" c="black">
             15+
