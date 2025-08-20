@@ -1,9 +1,10 @@
 import { Box, Text, Flex } from "@mantine/core";
 import classes from "./classes/Navbar.module.css";
-import { Link } from "../Link/Link";
-import MainButton from "../MainButton/MainButton";
+
 import { AnimatePresence, motion } from "motion/react";
 import { useLocation } from "react-router";
+import { Link } from "./components/Link";
+import MainButton from "../../widgets/MainButton/MainButton";
 
 export default function Navbar({ ref }: { ref: any }) {
   const location = useLocation();

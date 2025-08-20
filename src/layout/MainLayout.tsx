@@ -1,10 +1,10 @@
 import { Box, Flex } from "@mantine/core";
-import Navbar from "../widgets/Navbar/Navbar";
 import { Outlet } from "react-router";
-import Header from "../widgets/Header/Header";
+import Header from "../features/Header/Header";
 import { useState } from "react";
 import { useClickOutside, useMediaQuery } from "@mantine/hooks";
 import { AnimatePresence } from "motion/react";
+import Navbar from "../features/Navbar/Navbar";
 
 export default function MainLayout() {
   const isLargeScreen = useMediaQuery("(min-width: 990px)");

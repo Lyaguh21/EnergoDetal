@@ -3,9 +3,10 @@ import NavGallery from "./components/NavGallery";
 import { useState } from "react";
 import PhotoTemplate from "./components/PhotoTemplate";
 import { useDisclosure } from "@mantine/hooks";
-import ImageViewerModal from "../../widgets/ImageViewerModal/ImageViewerModal";
+
 import { Photo } from "../../entities/Photo.interface";
 import MainBigText from "../../widgets/Texts/MainBigText";
+import ImageViewerModal from "../../features/ImageViewerModal/ImageViewerModal";
 
 export default function Gallery() {
   const [responseTypePhoto, setResponseTypePhoto] =
