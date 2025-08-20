@@ -1,5 +1,6 @@
 import { Anchor, Box, Breadcrumbs, Flex } from "@mantine/core";
 import { useParams } from "react-router";
+import Model3d from "./components/Model3d";
 
 export default function ExecutionProduct() {
   const { BlueprintId } = useParams();
@@ -30,12 +31,18 @@ export default function ExecutionProduct() {
       {item.title}
     </Anchor>
   ));
+
   return (
     <>
       <Flex px={20} h={90} w="100%" align="center">
         <Breadcrumbs separatorMargin="sm">{items}</Breadcrumbs>
       </Flex>
-      <Box p={20}></Box>
+      <Box p={20}>
+        <Flex justify="space-between">
+          <Model3d />
+          <Box bg="blue" w="50%" />
+        </Flex>
+      </Box>
     </>
   );
 }
