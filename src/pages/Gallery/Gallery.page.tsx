@@ -1,69 +1,69 @@
-import { Box, Flex, Text } from "@mantine/core";
+import { Box, Center, Flex, Skeleton, Text } from "@mantine/core";
 import NavGallery from "./components/NavGallery";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PhotoTemplate from "./components/PhotoTemplate";
+import axios from "axios";
 import { useDisclosure } from "@mantine/hooks";
-
 import { Photo } from "../../entities/Photo.interface";
 import MainBigText from "../../widgets/Texts/MainBigText";
 import ImageViewerModal from "../../features/ImageViewerModal/ImageViewerModal";
+import { API } from "../../app/helpers";
 
 export default function Gallery() {
-  const [responseTypePhoto, setResponseTypePhoto] =
-    useState<string>("products");
+  const [responseTypePhoto, setResponseTypePhoto] = useState<
+    "Products" | "Machines" | " Production"
+  >("Products");
   const [opened, { open, close }] = useDisclosure(false);
   const [selectPosImage, setSelectPosImage] = useState<number>(0);
+  const [data, setData] = useState<Photo[]>([]);
 
-  const data = [
-    {
-      link: "https://avatars.mds.yandex.net/i?id=db775e2c262998b7bb5d5759da2c64df466aa5a2-5749428-images-thumbs&n=13",
-      title: "Опора Трубопровода 1",
-    },
-    {
-      link: "https://avatars.mds.yandex.net/i?id=884edb525425300d10ba53dd8b1ee02ecad7bc4c-4902542-images-thumbs&n=13",
-      title: "Опора Трубопровода 1",
-    },
-    {
-      link: "https://avatars.mds.yandex.net/i?id=d2bccfd53a465a4dbcd3ad6cd4d70730368d2a5d-5887963-images-thumbs&n=13",
-      title: "Опора Трубопровода 1",
-    },
-    {
-      link: "https://avatars.mds.yandex.net/i?id=0ac7ba5d05bf93401510fec9e5389ec287b66480-12715410-images-thumbs&n=13",
-      title: "Опора Трубопровода 1",
-    },
-    {
-      link: "https://avatars.mds.yandex.net/i?id=97203da10fc54ae2eded06dd0d1857c201ed044d-2856395-images-thumbs&n=13",
-      title: "Опора Трубопровода 1",
-    },
-    {
-      link: "https://avatars.mds.yandex.net/i?id=7e26008924b8ed9498e5785bd7596d25fe3b78d5-5396308-images-thumbs&n=13",
-      title: "Опора Трубопровода 1",
-    },
-    {
-      link: "https://avatars.mds.yandex.net/i?id=7e26008924b8ed9498e5785bd7596d25fe3b78d5-5396308-images-thumbs&n=13",
-      title: "Опора Трубопровода 1",
-    },
-    {
-      link: "https://avatars.mds.yandex.net/i?id=7e26008924b8ed9498e5785bd7596d25fe3b78d5-5396308-images-thumbs&n=13",
-      title: "Опора Трубопровода 1",
-    },
-    {
-      link: "https://avatars.mds.yandex.net/i?id=7e26008924b8ed9498e5785bd7596d25fe3b78d5-5396308-images-thumbs&n=13",
-      title: "Опора Трубопровода 1",
-    },
-    {
-      link: "https://avatars.mds.yandex.net/i?id=7e26008924b8ed9498e5785bd7596d25fe3b78d5-5396308-images-thumbs&n=13",
-      title: "Опора Трубопровода 1",
-    },
-    {
-      link: "https://avatars.mds.yandex.net/i?id=7e26008924b8ed9498e5785bd7596d25fe3b78d5-5396308-images-thumbs&n=13",
-      title: "Опора Трубопровода 1",
-    },
-    {
-      link: "https://avatars.mds.yandex.net/i?id=7e26008924b8ed9498e5785bd7596d25fe3b78d5-5396308-images-thumbs&n=13",
-      title: "Опора Трубопровода 1",
-    },
-  ];
+  const [loading, setLoading] = useState(false);
+  const [showSkeleton, setShowSkeleton] = useState(true);
+  const [minDisplayTimePassed, setMinDisplayTimePassed] = useState(false);
+
+  useEffect(() => {
+    // Сбрасываем флаг минимального времени при смене типа
+    setMinDisplayTimePassed(false);
+    setShowSkeleton(true);
+
+    const startTime = Date.now();
+    setLoading(true);
+
+    axios
+      .get(`${API}/gallery/${responseTypePhoto}`)
+      .then((res) => {
+        const elapsedTime = Date.now() - startTime;
+        const remainingTime = Math.max(1000 - elapsedTime, 0);
+
+        // Ждем минимум 1 секунду перед скрытием скелетона
+        setTimeout(() => {
+          setData(res.data || []);
+          setLoading(false);
+          setMinDisplayTimePassed(true);
+        }, remainingTime);
+      })
+      .catch((err) => {
+        console.error(err);
+        const elapsedTime = Date.now() - startTime;
+        const remainingTime = Math.max(1000 - elapsedTime, 0);
+
+        setTimeout(() => {
+          setLoading(false);
+          setMinDisplayTimePassed(true);
+          setData([]);
+        }, remainingTime);
+      });
+  }, [responseTypePhoto]);
+
+  // Скрываем скелетон только когда данные загружены И прошло минимальное время
+  useEffect(() => {
+    if (minDisplayTimePassed && !loading) {
+      const timer = setTimeout(() => {
+        setShowSkeleton(false);
+      }, 100); // Небольшая задержка для плавности
+      return () => clearTimeout(timer);
+    }
+  }, [minDisplayTimePassed, loading]);
 
   const handleOpenViewImage = (el: Photo) => {
     open();
@@ -82,7 +82,6 @@ export default function Gallery() {
 
       <Box w="100%" px={{ base: 20, md: 100 }}>
         <MainBigText>Галерея</MainBigText>
-
         <NavGallery set={setResponseTypePhoto} select={responseTypePhoto} />
 
         <Flex
@@ -91,13 +90,32 @@ export default function Gallery() {
           py={{ base: 10, md: 40 }}
           wrap="wrap"
         >
-          {data.map((el) => (
-            <PhotoTemplate
-              key={data.indexOf(el)}
-              link={el.link}
-              onClick={() => handleOpenViewImage(el)}
-            />
-          ))}
+          {showSkeleton &&
+            [1, 2, 3, 4, 5, 6, 7, 8].map((el) => (
+              <Skeleton
+                key={el}
+                style={{
+                  flexGrow: 1,
+                  width: 175,
+                  height: 175,
+                }}
+              />
+            ))}
+
+          {!showSkeleton && data.length === 0 && (
+            <Text w="100%" h="100%" ta="center">
+              Тут пока пусто :/
+            </Text>
+          )}
+
+          {!showSkeleton &&
+            data.map((el) => (
+              <PhotoTemplate
+                key={data.indexOf(el)}
+                link={el.url}
+                onClick={() => handleOpenViewImage(el)}
+              />
+            ))}
         </Flex>
       </Box>
     </>

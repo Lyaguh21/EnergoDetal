@@ -237,10 +237,7 @@ export default function ImageViewerModal({
               : {}
           }
         >
-          <Text pt={16} fw="bold" fz={isMobile ? 18 : 22}>
-            {data[selectPosImage]?.title}
-          </Text>
-          <Text fz={isMobile ? 14 : 16}>
+          <Text pt={isMobile ? 0 : 16} fw="bold" fz={isMobile ? 18 : 22}>
             {selectPosImage + 1} из {data.length}
           </Text>
         </Flex>
