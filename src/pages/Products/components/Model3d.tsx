@@ -10,13 +10,13 @@ const perToRad = (percent: number) => percent * 3.6 * (Math.PI / 180);
 const degToRad = (percent: number) => percent * (Math.PI / 180);
 
 function Cube({ percentRotation }: { percentRotation: number }) {
-  const { scene } = useGLTF("/models/industrial_electrical_box.glb");
+  const { scene } = useGLTF("/models/Опоры КХ ОСТ 36-146-88.glb");
 
   return (
     <mesh
       rotation={[0, perToRad(-percentRotation), 0]}
-      position={[-0.5, 0, 0]}
-      scale={6}
+      position={[-0.5, 0.5, 0]}
+      scale={5}
     >
       <primitive object={scene} />
     </mesh>
@@ -39,7 +39,7 @@ export default function Model3d() {
         style={{
           height: "100%",
           width: "100%",
-          background: "#dddddd",
+          background: "#f5f5f5",
           borderRadius: 8,
           zIndex: 2,
         }}
