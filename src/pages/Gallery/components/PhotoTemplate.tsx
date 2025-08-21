@@ -1,23 +1,26 @@
 import { Image } from "@mantine/core";
 import { motion } from "motion/react";
+import { Photo } from "../../../entities/Photo.interface";
 
 interface photo {
   link?: string | null;
+  data: Photo[];
   onClick: () => void;
 }
-export default function PhotoTemplate({ link, onClick }: photo) {
+export default function PhotoTemplate({ link, onClick, data }: photo) {
   return (
     <motion.div
       onClick={onClick}
       whileHover={{ scale: 1.1, filter: "brightness(0.7)" }}
       whileTap={{ scale: 0.98 }}
       style={{
-        flexGrow: 1,
-        width: 175,
+        width: "100%",
         height: 175,
+        borderRadius: 20,
+        overflow: "hidden",
       }}
     >
-      <Image src={link} radius={20} bg="blue" w="100%" h="100%"></Image>
+      <Image src={link} w="100%" h="100%" style={{ objectFit: "cover" }} />
     </motion.div>
   );
 }

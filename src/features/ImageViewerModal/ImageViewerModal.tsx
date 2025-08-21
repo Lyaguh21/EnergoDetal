@@ -25,22 +25,6 @@ export default function ImageViewerModal({
 }: ModalTypes) {
   const isMobile = useMediaQuery("(max-width: 1300px)");
 
-  useEffect(() => {
-    if (opened && isMobile) {
-      if (screen.orientation?.lock) {
-        screen.orientation.lock("landscape").catch((error) => {
-          console.log("Orientation lock not supported or failed:", error);
-        });
-      }
-    }
-
-    return () => {
-      if (screen.orientation?.unlock) {
-        screen.orientation.unlock();
-      }
-    };
-  }, [opened, isMobile]);
-
   const handlePrev = () => {
     if (selectPosImage > 0) {
       setSelectPosImage(selectPosImage - 1);
@@ -164,7 +148,7 @@ export default function ImageViewerModal({
 
           {/* Изображение */}
           <Image
-            src={data[selectPosImage]?.link}
+            src={data[selectPosImage]?.url}
             height={isMobile ? "auto" : 600}
             width={isMobile ? "100%" : "auto"}
             fit="contain"
@@ -179,7 +163,7 @@ export default function ImageViewerModal({
                   }
                 : {}
             }
-            alt={data[selectPosImage]?.title || "Image"}
+            alt={"Image"}
           />
 
           {/* Кнопка "Вперед" */}

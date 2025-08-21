@@ -84,39 +84,38 @@ export default function Gallery() {
         <MainBigText>Галерея</MainBigText>
         <NavGallery set={setResponseTypePhoto} select={responseTypePhoto} />
 
-        <Flex
-          gap={{ base: 20, md: 40 }}
+        <Box
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(175px, 1fr))",
+            gap: "20px",
+            width: "100%",
+          }}
           p={{ base: 0, md: 40 }}
           py={{ base: 10, md: 40 }}
-          wrap="wrap"
         >
           {showSkeleton &&
             [1, 2, 3, 4, 5, 6, 7, 8].map((el) => (
               <Skeleton
                 key={el}
                 style={{
-                  flexGrow: 1,
-                  width: 175,
+                  width: "100%",
                   height: 175,
+                  borderRadius: 20,
                 }}
               />
             ))}
 
-          {!showSkeleton && data.length === 0 && (
-            <Text w="100%" h="100%" ta="center">
-              Тут пока пусто :/
-            </Text>
-          )}
-
           {!showSkeleton &&
-            data.map((el) => (
+            data.map((el: Photo) => (
               <PhotoTemplate
-                key={data.indexOf(el)}
+                data={data}
+                key={el.id}
                 link={el.url}
                 onClick={() => handleOpenViewImage(el)}
               />
             ))}
-        </Flex>
+        </Box>
       </Box>
     </>
   );
