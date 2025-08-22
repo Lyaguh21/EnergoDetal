@@ -6,6 +6,7 @@ import Products from "../../pages/Products/Products.page";
 import Gallery from "../../pages/Gallery/Gallery.page";
 import Contacts from "../../pages/Contacts/Contacts.page";
 import ExecutionProduct from "../../pages/Products/ExecutionProduct.page";
+import DetailedExecution from "../../pages/Products/DetailedExecution.page";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "/products/:BlueprintId",
         element: <ExecutionProduct />,
+      },
+      {
+        path: "/products/:BlueprintId/:ExecutionId",
+        element: <DetailedExecution />,
       },
       {
         path: "/gallery",

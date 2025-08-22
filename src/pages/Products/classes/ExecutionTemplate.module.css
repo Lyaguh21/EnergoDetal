@@ -1,0 +1,13 @@
+.template {
+  border: 1px solid #b5b7bb;
+  width: 100%;
+  background-color: white;
+  border-radius: 8px;
+  padding: 30px;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.template:hover {
+  border-color: black;
+}

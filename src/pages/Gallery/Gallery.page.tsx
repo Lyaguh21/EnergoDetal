@@ -22,48 +22,49 @@ export default function Gallery() {
   const [minDisplayTimePassed, setMinDisplayTimePassed] = useState(false);
 
   useEffect(() => {
-    // Сбрасываем флаг минимального времени при смене типа
-    setMinDisplayTimePassed(false);
-    setShowSkeleton(true);
+    let isMounted = true;
 
-    const startTime = Date.now();
-    setLoading(true);
+    const fetchData = async () => {
+      const startTime = Date.now();
+      setLoading(true);
+      setShowSkeleton(true);
 
-    axios
-      .get(`${API}/gallery/${responseTypePhoto}`)
-      .then((res) => {
+      try {
+        const response = await axios.get(`${API}/gallery/${responseTypePhoto}`);
+
+        if (!isMounted) return;
+
         const elapsedTime = Date.now() - startTime;
-        const remainingTime = Math.max(1000 - elapsedTime, 0);
+        const minDisplayTime = 1000;
+        const remainingTime = Math.max(minDisplayTime - elapsedTime, 0);
 
-        // Ждем минимум 1 секунду перед скрытием скелетона
         setTimeout(() => {
-          setData(res.data || []);
+          setData(response.data || []);
           setLoading(false);
-          setMinDisplayTimePassed(true);
+          setShowSkeleton(false);
         }, remainingTime);
-      })
-      .catch((err) => {
+      } catch (err) {
         console.error(err);
+
+        if (!isMounted) return;
+
         const elapsedTime = Date.now() - startTime;
         const remainingTime = Math.max(1000 - elapsedTime, 0);
 
         setTimeout(() => {
-          setLoading(false);
-          setMinDisplayTimePassed(true);
           setData([]);
+          setLoading(false);
+          setShowSkeleton(false);
         }, remainingTime);
-      });
-  }, [responseTypePhoto]);
+      }
+    };
 
-  // Скрываем скелетон только когда данные загружены И прошло минимальное время
-  useEffect(() => {
-    if (minDisplayTimePassed && !loading) {
-      const timer = setTimeout(() => {
-        setShowSkeleton(false);
-      }, 100); // Небольшая задержка для плавности
-      return () => clearTimeout(timer);
-    }
-  }, [minDisplayTimePassed, loading]);
+    fetchData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [responseTypePhoto]);
 
   const handleOpenViewImage = (el: Photo) => {
     open();
@@ -84,6 +85,11 @@ export default function Gallery() {
         <MainBigText>Галерея</MainBigText>
         <NavGallery set={setResponseTypePhoto} select={responseTypePhoto} />
 
+        {!showSkeleton && data.length === 0 && (
+          <Center w="100%" h={200}>
+            <Text>Тут пока пусто :/</Text>
+          </Center>
+        )}
         <Box
           style={{
             display: "grid",

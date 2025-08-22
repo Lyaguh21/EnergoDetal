@@ -1,18 +1,14 @@
-import { Box, Flex, Text } from "@mantine/core";
+import { Box, Flex, Skeleton, Text } from "@mantine/core";
 import BlueprintTemplate from "./tempaltes/BlueprintTemplate";
+import { Blueprint } from "../../../entities/Blueprint.iterface";
 
-export default function ListBlueprint() {
-  const data = [
-    { title: "ГОСТ 17379-2001", link: "GOST17379-2001" },
-    { title: "ГОСТ 17379-2001", link: "GOST17379-2001" },
-    { title: "ГОСТ 17379-2001", link: "GOST17379-2001" },
-    { title: "ГОСТ 17379-2001", link: "GOST17379-2001" },
-    { title: "ГОСТ 17379-2001", link: "GOST17379-2001" },
-    { title: "ГОСТ 17379-2001", link: "GOST17379-2001" },
-    { title: "ГОСТ 17379-2001", link: "GOST17379-2001" },
-    { title: "ГОСТ 17379-2001", link: "GOST17379-2001" },
-  ];
-
+export default function ListBlueprint({
+  data,
+  showSkeleton,
+}: {
+  data: Blueprint[];
+  showSkeleton: boolean;
+}) {
   return (
     <Box>
       <Text ta="center" py={30} fz={32} fw="bold" pb={10}>
@@ -20,9 +16,15 @@ export default function ListBlueprint() {
       </Text>
 
       <Flex direction="column" gap={20} pb={30}>
-        {data.map((el) => (
-          <BlueprintTemplate text={el.title} link={el.link} />
-        ))}
+        {!showSkeleton &&
+          data.map((el) => (
+            <BlueprintTemplate name={el.name} key={data.indexOf(el)} />
+          ))}
+
+        {showSkeleton &&
+          [1, 2, 3, 4, 5, 6].map((el) => (
+            <Skeleton bdrs={8} w="100%" h={52} key={el} />
+          ))}
       </Flex>
     </Box>
   );

@@ -9,7 +9,7 @@ export default function NavGallery({ select, set }: navbar) {
   const buttons = [
     { title: "Продукция", type: "Products" },
     { title: "Станки", type: "Machines" },
-    { title: "Производство", type: "Productions" },
+    { title: "Производство", type: "Production" },
   ];
   return (
     <Flex className={classes.borderB} w="100%">
