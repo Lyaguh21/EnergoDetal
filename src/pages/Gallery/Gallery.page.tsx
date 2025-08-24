@@ -1,7 +1,7 @@
 import { Box, Center, Flex, Skeleton, Text } from "@mantine/core";
 import NavGallery from "./components/NavGallery";
 import { useEffect, useState } from "react";
-import PhotoTemplate from "./components/PhotoTemplate";
+import PhotoTemplate from "../../features/PhotoTemplate/PhotoTemplate";
 import axios from "axios";
 import { useDisclosure } from "@mantine/hooks";
 import { Photo } from "../../entities/Photo.interface";
@@ -11,7 +11,7 @@ import { API } from "../../app/helpers";
 
 export default function Gallery() {
   const [responseTypePhoto, setResponseTypePhoto] = useState<
-    "Products" | "Machines" | " Production"
+    "Products" | "Machines" | "Production"
   >("Products");
   const [opened, { open, close }] = useDisclosure(false);
   const [selectPosImage, setSelectPosImage] = useState<number>(0);
@@ -39,7 +39,7 @@ export default function Gallery() {
         const remainingTime = Math.max(minDisplayTime - elapsedTime, 0);
 
         setTimeout(() => {
-          setData(response.data || []);
+          setData(response.data.data || []);
           setLoading(false);
           setShowSkeleton(false);
         }, remainingTime);
@@ -115,7 +115,6 @@ export default function Gallery() {
           {!showSkeleton &&
             data.map((el: Photo) => (
               <PhotoTemplate
-                data={data}
                 key={el.id}
                 link={el.url}
                 onClick={() => handleOpenViewImage(el)}

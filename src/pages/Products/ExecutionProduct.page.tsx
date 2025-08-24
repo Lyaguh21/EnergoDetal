@@ -1,4 +1,4 @@
-import { Anchor, Box, Breadcrumbs, Flex, Text } from "@mantine/core";
+import { Anchor, Box, Breadcrumbs, Flex, Skeleton, Text } from "@mantine/core";
 import { useParams } from "react-router";
 import { Execution } from "../../entities/Execution.interface";
 import { useEffect, useState } from "react";
@@ -17,7 +17,7 @@ export default function ExecutionProduct() {
   const [data, setData] = useState<dataRequest | null>(null);
 
   const [loading, setLoading] = useState(false);
-  const [showSkeleton, setShowSkeleton] = useState(true);
+  const [showSkeleton, setShowSkeleton] = useState(false);
   const [minDisplayTimePassed, setMinDisplayTimePassed] = useState(false);
 
   useEffect(() => {
@@ -70,17 +70,21 @@ export default function ExecutionProduct() {
   const items = [
     { title: "Продукция", href: "/products" },
     { title: data?.name, href: `/products/${BlueprintId}` },
-  ].map((item, index) => (
-    <Anchor
-      href={item.href}
-      key={index}
-      c={index === 1 ? "#000" : "#515661"}
-      fz={20}
-      fw="500"
-    >
-      {item.title}
-    </Anchor>
-  ));
+  ].map((item, index) =>
+    !showSkeleton ? (
+      <Anchor
+        href={item.href}
+        key={index}
+        c={index === 1 ? "#000" : "#515661"}
+        fz={20}
+        fw="500"
+      >
+        {item.title}
+      </Anchor>
+    ) : (
+      <Skeleton w={150} h={25} />
+    )
+  );
 
   return (
     <>
@@ -88,12 +92,22 @@ export default function ExecutionProduct() {
         <Breadcrumbs separatorMargin="sm">{items}</Breadcrumbs>
       </Flex>
       <Box px={20}>
-        <Text fz={64} fw="bold">
-          {data?.name}
-        </Text>
-        <Text fz={28} c="#515661" mb={30}>
-          {data?.description}
-        </Text>
+        {!showSkeleton ? (
+          <>
+            <Text fz={64} fw="bold">
+              {data?.name}
+            </Text>
+            <Text fz={28} c="#515661" mb={30}>
+              {data?.description}
+            </Text>
+          </>
+        ) : (
+          <>
+            <Skeleton w={600} h={100} />
+            <Skeleton w={500} h={40} mb={30} mt={10} />
+          </>
+        )}
+
         <Text fz={28} mb={20} fw="bold">
           Исполнения
         </Text>
@@ -106,9 +120,13 @@ export default function ExecutionProduct() {
             width: "100%",
           }}
         >
-          {data?.execution.map((el) => (
-            <ExecutionTemplate data={el} />
-          ))}
+          {!showSkeleton &&
+            data?.execution.map((el) => <ExecutionTemplate data={el} />)}
+
+          {showSkeleton &&
+            [1, 2, 3].map((el) => (
+              <Skeleton radius="md" w="100%" h="450px" key={el} />
+            ))}
         </Box>
       </Box>
     </>

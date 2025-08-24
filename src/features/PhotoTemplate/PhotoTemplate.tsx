@@ -1,13 +1,12 @@
 import { Image } from "@mantine/core";
 import { motion } from "motion/react";
-import { Photo } from "../../../entities/Photo.interface";
+import { Photo } from "../../entities/Photo.interface";
 
 interface photo {
   link?: string | null;
-  data: Photo[];
-  onClick: () => void;
+  onClick?: () => void;
 }
-export default function PhotoTemplate({ link, onClick, data }: photo) {
+export default function PhotoTemplate({ link, onClick }: photo) {
   return (
     <motion.div
       onClick={onClick}
