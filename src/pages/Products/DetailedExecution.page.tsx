@@ -1,40 +1,94 @@
 import { Anchor, Box, Breadcrumbs, Flex, Skeleton, Text } from "@mantine/core";
 import { useParams } from "react-router";
 import Model3d from "./components/Model3d";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PhotoTemplate from "../../features/PhotoTemplate/PhotoTemplate";
-import ImageViewerModal from "../../features/ImageViewerModal/ImageViewerModal";
+import { Carousel } from "@mantine/carousel";
 import { useDisclosure } from "@mantine/hooks";
+import "@mantine/carousel/styles.css";
+import axios from "axios";
+import { API } from "../../app/helpers";
+import ImageViewerModal from "../../features/ImageViewerModal/ImageViewerModal";
+import { Photo } from "../../entities/Photo.interface";
 
 interface dataRequest {
-  name: string; //имя по которому будет идти request к таблице
+  name: string;
   description: string;
-
-  model: string; //3д модель
-  certificate: string; //сертификат закрепленный
-  photos: string[]; //// фотки
+  modelurl: string;
+  certificate: string;
+  imageurls: string[];
 }
 export default function DetailedExecution() {
-  const [opened, { open, close }] = useDisclosure(false);
-  const [selectPosImage, setSelectPosImage] = useState<number>(0);
   const { BlueprintId, ExecutionId } = useParams();
-  const [data, setData] = useState<dataRequest | null>({
-    name: "КП-1",
-    description: "Описание для КП",
-    model:
-      "https://storage.yandexcloud.net/energodetal/Models/%D0%9C%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C.glb",
-    certificate:
-      "https://i.pinimg.com/originals/8c/0f/c7/8c0fc7535a6602398207975b9e5f481c.jpg",
-    photos: [
-      "https://i.pinimg.com/originals/8c/0f/c7/8c0fc7535a6602398207975b9e5f481c.jpg",
-      "https://i.pinimg.com/originals/8c/0f/c7/8c0fc7535a6602398207975b9e5f481c.jpg",
-      "https://i.pinimg.com/originals/8c/0f/c7/8c0fc7535a6602398207975b9e5f481c.jpg",
-      "https://i.pinimg.com/originals/8c/0f/c7/8c0fc7535a6602398207975b9e5f481c.jpg",
-    ],
-  });
+  const [opened, { open, close }] = useDisclosure(false);
+
+  const [transformedPhotos, setTransformedPhotos] = useState<Photo[]>();
+  const [data, setData] = useState<dataRequest | null>(null);
+
   const [loading, setLoading] = useState(false);
   const [showSkeleton, setShowSkeleton] = useState(false);
   const [minDisplayTimePassed, setMinDisplayTimePassed] = useState(false);
+
+  const [viewerPhoto, setViewerPhoto] = useState([]);
+  const [selectPosImage, setSelectPosImage] = useState<number>(0);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchData = async () => {
+      const startTime = Date.now();
+      setLoading(true);
+      setShowSkeleton(true);
+
+      try {
+        const response = await axios.get<dataRequest>(
+          `${API}/products/${BlueprintId}/${ExecutionId}`
+        );
+
+        if (!isMounted) return;
+
+        const elapsedTime = Date.now() - startTime;
+        const minDisplayTime = 1000;
+        const remainingTime = Math.max(minDisplayTime - elapsedTime, 0);
+
+        setTimeout(() => {
+          setData(response.data);
+          setLoading(false);
+          setShowSkeleton(false);
+        }, remainingTime);
+      } catch (err) {
+        console.error(err);
+
+        if (!isMounted) return;
+
+        const elapsedTime = Date.now() - startTime;
+        const remainingTime = Math.max(1000 - elapsedTime, 0);
+
+        setTimeout(() => {
+          setData(null);
+          setLoading(false);
+          setShowSkeleton(false);
+        }, remainingTime);
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (data?.imageurls) {
+      const transformedPhotos: Photo[] = data.imageurls.map((url, index) => ({
+        id: index + 1,
+        url: url,
+      }));
+      setTransformedPhotos(transformedPhotos);
+      setViewerPhoto(transformedPhotos);
+    }
+  }, [data?.imageurls]);
 
   const items = [
     { title: "Продукция", href: "/products" },
@@ -58,26 +112,96 @@ export default function DetailedExecution() {
 
   return (
     <>
+      <ImageViewerModal
+        close={close}
+        opened={opened}
+        selectPosImage={selectPosImage}
+        setSelectPosImage={setSelectPosImage}
+        data={viewerPhoto}
+      />
+
       <Flex px={20} h={90} w="100%" align="center">
         <Breadcrumbs separatorMargin="sm">{items}</Breadcrumbs>
       </Flex>
       <Box px={20}>
         <Flex justify="space-between">
-          <Model3d />
+          {showSkeleton ? (
+            <Skeleton
+              w={"45%"}
+              style={{ aspectRatio: "1/1", borderRadius: "8px" }}
+            />
+          ) : (
+            <Model3d />
+          )}
           <Box w="50%">
-            <Text fz={64} fw="bold">
-              {data?.name}
-            </Text>
-            <Text fz={28} c="#515661" mb={30}>
-              {data?.description}
-            </Text>
+            {!showSkeleton ? (
+              <>
+                <Text fz={64} fw="bold">
+                  {data?.name}
+                </Text>
+                <Text fz={28} c="#515661" mb={30}>
+                  {data?.description}
+                </Text>
+              </>
+            ) : (
+              <>
+                <Skeleton w={400} h={80} />
+                <Skeleton w={500} h={40} mb={5} mt={10} />
+                <Skeleton w={500} h={40} mb={5} />
+                <Skeleton w={500} h={40} mb={5} />
+                <Skeleton w={500} h={40} mb={5} />
+                <Skeleton w={500} h={40} mb={5} />
+                <Skeleton w={500} h={40} mb={5} />
+                <Skeleton w={500} h={40} mb={5} />
+              </>
+            )}
           </Box>
         </Flex>
       </Box>
-      <Flex w="100%" justify="space-between" py={45} px={20}>
-        <Box w={175} h={175}>
-          <PhotoTemplate onClick={open} link={data?.certificate} />
-        </Box>
+
+      <Flex w="100%" align="center" justify="space-between" py={20} px={20}>
+        {!showSkeleton ? (
+          <Box w={175} h={175}>
+            <PhotoTemplate
+              onClick={() => {
+                setSelectPosImage(0);
+                setViewerPhoto([{ id: 1, url: data?.certificate }]);
+                open();
+              }}
+              link={data?.certificate}
+            />
+          </Box>
+        ) : (
+          <Skeleton bdrs={8} w={175} h={175} />
+        )}
+
+        <Carousel w={609} slideSize="175px" slideGap="sm" controlSize={35}>
+          {!showSkeleton &&
+            data?.imageurls.map((el) => (
+              <Carousel.Slide key={data?.imageurls.indexOf(el)}>
+                <Flex align="center" justify="center" p={10}>
+                  <PhotoTemplate
+                    onClick={() => {
+                      setSelectPosImage(data?.imageurls.indexOf(el));
+                      setViewerPhoto(transformedPhotos);
+                      open();
+                    }}
+                    link={el}
+                    w={175}
+                  />
+                </Flex>
+              </Carousel.Slide>
+            ))}
+
+          {showSkeleton &&
+            [1, 2, 3].map((el) => (
+              <Carousel.Slide>
+                <Flex align="center" justify="center" p={10}>
+                  <Skeleton key={el} w={175} h={175} bdrs={8} />
+                </Flex>
+              </Carousel.Slide>
+            ))}
+        </Carousel>
       </Flex>
     </>
   );
