@@ -10,6 +10,7 @@ import axios from "axios";
 import { API } from "../../app/helpers";
 import ImageViewerModal from "../../features/ImageViewerModal/ImageViewerModal";
 import { Photo } from "../../entities/Photo.interface";
+import TableSection from "./components/tempaltes/TableSection";
 
 interface dataRequest {
   name: string;
@@ -131,7 +132,7 @@ export default function DetailedExecution() {
               style={{ aspectRatio: "1/1", borderRadius: "8px" }}
             />
           ) : (
-            <Model3d />
+            <Model3d modelUrl={data?.modelurl} />
           )}
           <Box w="50%">
             {!showSkeleton ? (
@@ -203,6 +204,8 @@ export default function DetailedExecution() {
             ))}
         </Carousel>
       </Flex>
+
+      <TableSection />
     </>
   );
 }

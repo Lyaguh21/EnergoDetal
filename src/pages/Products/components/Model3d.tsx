@@ -1,21 +1,25 @@
 import { Box, Slider } from "@mantine/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Environment, useGLTF } from "@react-three/drei";
-
-const url =
-  "https://storage.yandexcloud.net/energodetal/Models/%D0%9C%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C.glb";
+import { useGLTF } from "@react-three/drei";
 
 const perToRad = (percent: number) => percent * 3.6 * (Math.PI / 180);
 const degToRad = (percent: number) => percent * (Math.PI / 180);
 
-function Cube({ percentRotation }: { percentRotation: number }) {
+function Model({
+  percentRotation,
+  modelUrl,
+}: {
+  percentRotation: number;
+  modelUrl: string;
+}) {
+  // const { scene } = useGLTF(modelUrl);
   const { scene } = useGLTF("/models/Опоры КХ ОСТ 36-146-88.glb");
 
   return (
     <mesh
-      rotation={[0, perToRad(-percentRotation), 0]}
-      position={[-0.5, 0.5, 0]}
+      rotation={[perToRad(180), 0, perToRad(-13 - percentRotation)]}
+      position={[-1, 0, 1]}
       scale={5}
     >
       <primitive object={scene} />
@@ -23,8 +27,33 @@ function Cube({ percentRotation }: { percentRotation: number }) {
   );
 }
 
-export default function Model3d() {
+export default function Model3d({
+  modelUrl,
+}: {
+  modelUrl: string | undefined;
+}) {
   const [value, setValue] = useState(0);
+
+  if (!modelUrl) {
+    return (
+      <Box
+        w="calc(45%)"
+        style={{
+          position: "relative",
+          border: "1px solid black",
+          borderRadius: 8,
+          aspectRatio: "1 / 1",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          background: "#f5f5f5",
+        }}
+      >
+        Модель не загружена
+      </Box>
+    );
+  }
+
   return (
     <Box
       w="calc(45%)"
@@ -58,7 +87,8 @@ export default function Model3d() {
         />
         <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
 
-        <Cube percentRotation={value} />
+        {/* Передаем modelUrl в компонент Model */}
+        <Model percentRotation={value} modelUrl={modelUrl} />
       </Canvas>
 
       <Box
