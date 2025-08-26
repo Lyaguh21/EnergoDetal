@@ -86,11 +86,11 @@ export default function TableSection() {
   ));
   return (
     <>
-      <Text fz={40} fw="bold" px="20">
+      <Text fz={{ base: 20, sm: 40 }} fw="bold" px="20">
         Технические характеристики
       </Text>
 
-      <Box px={20} py={20}>
+      <Box px={20} py={20} style={{ overflow: "scroll" }}>
         {!showSkeleton && (
           <>
             <Box

@@ -14,14 +14,14 @@ function Model({
   percentRotation: number;
   modelUrl: string;
 }) {
-  const { scene } = useGLTF("/models/Опоры КХ ОСТ 36-146-88.glb");
+  const { scene } = useGLTF("/models/Опоры КХ ОСТ 36-146-88 Restailed.glb");
 
   const clonedScene = useMemo(() => scene.clone(), [scene]);
   return (
     <mesh
-      rotation={[perToRad(180), 0, perToRad(-13 - percentRotation)]}
-      position={[-1, 0, 1]}
-      scale={4.5}
+      rotation={[0, perToRad(-13 - percentRotation), 0]}
+      position={[0, 0, 0]}
+      scale={6}
     >
       <primitive object={clonedScene} />
     </mesh>
@@ -61,11 +61,11 @@ export default function Model3d({
       <ModelViewerModal
         close={close}
         opened={opened}
-        modelUrl={"/models/Опоры КХ ОСТ 36-146-88.glb"}
+        modelUrl={"/models/Опоры КХ ОСТ 36-146-88 Restailed.glb"}
       />
 
       <Box
-        w="calc(45%)"
+        w={{ base: "100%", xs: "45%" }}
         style={{
           position: "relative",
           border: "1px solid black",
@@ -121,6 +121,7 @@ export default function Model3d({
           <Slider
             size="xl"
             color="indigo"
+            label={null}
             value={value}
             onChange={setValue}
             marks={[

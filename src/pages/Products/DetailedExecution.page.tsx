@@ -127,13 +127,14 @@ export default function DetailedExecution() {
         <Flex justify="space-between" wrap={"wrap"}>
           {showSkeleton ? (
             <Skeleton
-              w={"45%"}
+              w={{ base: "100%", xs: "45%" }}
+              mb={{ base: 20, xs: "0" }}
               style={{ aspectRatio: "1/1", borderRadius: "8px" }}
             />
           ) : (
             <Model3d modelUrl={data?.modelurl} />
           )}
-          <Box w="50%">
+          <Box w={{ base: "100%", xs: "50%" }}>
             {!showSkeleton ? (
               <>
                 <Text fz={64} fw="bold">
@@ -159,7 +160,14 @@ export default function DetailedExecution() {
         </Flex>
       </Box>
 
-      <Flex w="100%" align="center" justify="space-between" py={20} px={20}>
+      <Flex
+        w="100%"
+        align="center"
+        justify="space-between"
+        wrap={"wrap"}
+        py={20}
+        px={20}
+      >
         {!showSkeleton ? (
           <Box w={175} h={175}>
             <PhotoTemplate
@@ -175,7 +183,12 @@ export default function DetailedExecution() {
           <Skeleton bdrs={8} w={175} h={175} />
         )}
 
-        <Carousel w={609} slideSize="175px" slideGap="sm" controlSize={35}>
+        <Carousel
+          w={{ base: "195px", xs: "402px", sm: "609px" }}
+          slideSize="175px"
+          slideGap="sm"
+          controlSize={35}
+        >
           {!showSkeleton &&
             data?.imageurls.map((el) => (
               <Carousel.Slide key={data?.imageurls.indexOf(el)}>
