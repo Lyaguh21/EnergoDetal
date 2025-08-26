@@ -35,7 +35,6 @@ export default function DetailedExecution() {
 
   useEffect(() => {
     let isMounted = true;
-
     const fetchData = async () => {
       const startTime = Date.now();
       setLoading(true);
