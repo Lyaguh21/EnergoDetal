@@ -10,7 +10,7 @@ import axios from "axios";
 import { API } from "../../app/helpers";
 import ImageViewerModal from "../../features/ImageViewerModal/ImageViewerModal";
 import { Photo } from "../../entities/Photo.interface";
-import TableSection from "./components/tempaltes/TableSection";
+import TableSection from "./components/TableSection";
 
 interface dataRequest {
   name: string;
@@ -125,7 +125,7 @@ export default function DetailedExecution() {
         <Breadcrumbs separatorMargin="sm">{items}</Breadcrumbs>
       </Flex>
       <Box px={20}>
-        <Flex justify="space-between">
+        <Flex justify="space-between" wrap={"wrap"}>
           {showSkeleton ? (
             <Skeleton
               w={"45%"}
@@ -196,9 +196,9 @@ export default function DetailedExecution() {
 
           {showSkeleton &&
             [1, 2, 3].map((el) => (
-              <Carousel.Slide>
+              <Carousel.Slide key={el}>
                 <Flex align="center" justify="center" p={10}>
-                  <Skeleton key={el} w={175} h={175} bdrs={8} />
+                  <Skeleton w={175} h={175} bdrs={8} />
                 </Flex>
               </Carousel.Slide>
             ))}

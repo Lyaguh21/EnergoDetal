@@ -45,12 +45,26 @@ export default function Navbar({ ref }: { ref: any }) {
           className={classes.borderB}
           gap={5}
         >
-          <Link to="/" style={{ textDecoration: "underline" }}>
+          <a
+            href="mailto:trubi@contact.ru"
+            style={{
+              textDecoration: "underline",
+              color: "#4e535d",
+              fontSize: "22px",
+            }}
+          >
             trubi@contact.ru
-          </Link>
-          <Link to="/" style={{ textDecoration: "underline" }}>
+          </a>
+          <a
+            href="tel: +79181234567"
+            style={{
+              textDecoration: "underline",
+              color: "#4e535d",
+              fontSize: "22px",
+            }}
+          >
             +7 (918) 123-45-67
-          </Link>
+          </a>
           <MainButton style={{ marginTop: "5px" }} color="white">
             Оставить заявку
           </MainButton>

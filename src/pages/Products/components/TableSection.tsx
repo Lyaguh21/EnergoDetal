@@ -2,12 +2,13 @@ import { Box, Input, Skeleton, Table, Text } from "@mantine/core";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { API } from "../../../../app/helpers";
+import { API } from "../../../app/helpers";
+import { TableProducts } from "../../../entities/TableProducts.interface";
 
 export default function TableSection() {
   const { BlueprintId, ExecutionId } = useParams();
 
-  const [data, setData] = useState();
+  const [data, setData] = useState<TableProducts | null>();
   const [loading, setLoading] = useState(false);
   const [showSkeleton, setShowSkeleton] = useState(false);
   const [minDisplayTimePassed, setMinDisplayTimePassed] = useState(false);
@@ -59,12 +60,28 @@ export default function TableSection() {
     };
   }, []);
 
-  const rows = data?.map((element) => (
+  const rows = data?.map((element: TableProducts) => (
     <Table.Tr key={element.name}>
-      <Table.Td>{element.name}</Table.Td>
-      <Table.Td>{element.mass}</Table.Td>
-      <Table.Td>{element.price1}</Table.Td>
-      <Table.Td>{element.price2}</Table.Td>
+      <Table.Td>
+        <Text ta="center" c="#515661" fw="regular">
+          {element.name}
+        </Text>
+      </Table.Td>
+      <Table.Td>
+        <Text ta="center" c="#515661" fw="regular">
+          {element.mass}
+        </Text>
+      </Table.Td>
+      <Table.Td>
+        <Text ta="center" c="#515661" fw="regular">
+          {element.price1}
+        </Text>
+      </Table.Td>
+      <Table.Td>
+        <Text ta="center" c="#515661" fw="regular">
+          {element.price2}
+        </Text>
+      </Table.Td>
     </Table.Tr>
   ));
   return (
@@ -82,6 +99,7 @@ export default function TableSection() {
                 border: "1px solid #D2D3D6",
                 borderTopLeftRadius: "8px",
                 borderTopRightRadius: "8px",
+                borderBottom: "none",
               }}
             >
               <Input
@@ -94,10 +112,26 @@ export default function TableSection() {
             <Table style={{}}>
               <Table.Thead bg="#FBFBFB" style={{ border: "1px solid #D2D3D6" }}>
                 <Table.Tr>
-                  <Table.Th>ОБОЗНАЧЕНИЕ</Table.Th>
-                  <Table.Th>МАССА, КГ</Table.Th>
-                  <Table.Th>ЦЕНА СТАЛЬ 3, ₽</Table.Th>
-                  <Table.Th>ЦЕНА 09Г2С, ₽</Table.Th>
+                  <Table.Th>
+                    <Text ta="center" c="#515661" fw="regular">
+                      ОБОЗНАЧЕНИЕ
+                    </Text>
+                  </Table.Th>
+                  <Table.Th>
+                    <Text ta="center" c="#515661" fw="regular">
+                      МАССА, КГ
+                    </Text>
+                  </Table.Th>
+                  <Table.Th>
+                    <Text ta="center" c="#515661" fw="regular">
+                      ЦЕНА СТАЛЬ 3, ₽
+                    </Text>
+                  </Table.Th>
+                  <Table.Th>
+                    <Text ta="center" c="#515661" fw="regular">
+                      ЦЕНА 09Г2С, ₽
+                    </Text>
+                  </Table.Th>
                 </Table.Tr>
               </Table.Thead>
               <Table.Tbody
@@ -112,7 +146,7 @@ export default function TableSection() {
           </>
         )}
 
-        {showSkeleton && <Skeleton bdrs={8} h="100px" w="100%" />}
+        {showSkeleton && <Skeleton bdrs={8} h="160px" w="100%" />}
       </Box>
     </>
   );

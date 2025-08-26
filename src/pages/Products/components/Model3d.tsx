@@ -13,14 +13,13 @@ function Model({
   percentRotation: number;
   modelUrl: string;
 }) {
-  // const { scene } = useGLTF(modelUrl);
   const { scene } = useGLTF("/models/Опоры КХ ОСТ 36-146-88.glb");
 
   return (
     <mesh
       rotation={[perToRad(180), 0, perToRad(-13 - percentRotation)]}
       position={[-1, 0, 1]}
-      scale={5}
+      scale={4.5}
     >
       <primitive object={scene} />
     </mesh>
