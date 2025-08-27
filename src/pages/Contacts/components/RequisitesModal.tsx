@@ -38,9 +38,11 @@ export default function RequisitesModal({ close, opened }: ModalTypes) {
           <Text c="#515661">{el.value}</Text>
         </Flex>
       ))}
-      <MainButton mt={45} fullWidth>
-        Скачать
-      </MainButton>
+      <a download href="./Реквизиты.xlsx" style={{ textDecoration: "none" }}>
+        <MainButton mt={45} fullWidth>
+          Скачать
+        </MainButton>
+      </a>
     </Modal>
   );
 }

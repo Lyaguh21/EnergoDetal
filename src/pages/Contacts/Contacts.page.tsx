@@ -66,12 +66,14 @@ export default function Contacts() {
                 >
                   Реквизиты
                 </Button>
-                <Button
-                  style={{ aspectRatio: "1 / 1" }}
-                  className={classes.OutlineButton}
-                >
-                  <IconDownload size={30} />
-                </Button>
+                <a download href="./Реквизиты.xlsx">
+                  <Button
+                    style={{ aspectRatio: "1 / 1" }}
+                    className={classes.OutlineButton}
+                  >
+                    <IconDownload size={30} />
+                  </Button>
+                </a>
               </Flex>
             </Flex>
           </Flex>
