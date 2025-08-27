@@ -28,25 +28,23 @@ export default function ModelViewerModal({
   close,
   modelUrl,
 }: ModalTypes) {
-  const isMobile = useMediaQuery("(max-width: 1300px)");
-
   return (
     <Modal
-      size={!isMobile ? "auto" : "xl"}
-      fullScreen={isMobile}
+      size="auto"
+      fullScreen={true}
       onClose={close}
       title="Подробный просмотр"
       opened={opened}
     >
       <Canvas
         style={{
-          width: "100%",
-          height: "100%",
+          width: "98vw",
+          height: "90.5vh",
           background: "#f5f5f5",
           borderRadius: 8,
           zIndex: 2,
-          aspectRatio: isMobile ? "1 / 2" : "16/9",
           cursor: "grab",
+          overflow: "hidden",
         }}
         camera={{
           position: [0, 2, 5],

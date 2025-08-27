@@ -90,7 +90,7 @@ export default function TableSection() {
         Технические характеристики
       </Text>
 
-      <Box px={20} py={20} style={{ overflow: "scroll" }}>
+      <Box px={20} py={20}>
         {!showSkeleton && (
           <>
             <Box

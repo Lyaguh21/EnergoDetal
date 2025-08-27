@@ -46,7 +46,7 @@ export default function Navbar({ ref }: { ref: any }) {
           gap={5}
         >
           <a
-            href="mailto:trubi@contact.ru"
+            href="mailto:trubi@gmai.ru?Subject=Оформление заказа&Body=Здравствуйте, заинтересовали ваши услуги. "
             style={{
               textDecoration: "underline",
               color: "#4e535d",
@@ -65,9 +65,12 @@ export default function Navbar({ ref }: { ref: any }) {
           >
             +7 (918) 123-45-67
           </a>
-          <MainButton style={{ marginTop: "5px" }} color="white">
-            Оставить заявку
-          </MainButton>
+
+          <a href="mailto:trubi@gmai.ru?Subject=Оформление заказа&Body=Здравствуйте, заинтересовали ваши услуги. ">
+            <MainButton style={{ marginTop: "5px" }} color="white">
+              Оставить заявку
+            </MainButton>
+          </a>
         </Flex>
 
         <Flex

@@ -1,6 +1,6 @@
 .BlueprintTemplate {
   width: 100%;
-  border: 1px solid #b1b3b8;
+  border: 2px solid #b1b3b8;
   color: black;
   font-size: 20px;
   font-weight: 500;
@@ -10,7 +10,7 @@
 }
 
 .BlueprintTemplate:hover {
-  color: #800000;
-  border-color: #800000;
+  color: #c40202;
+  border-color: #c40202;
   text-decoration: underline;
 }
