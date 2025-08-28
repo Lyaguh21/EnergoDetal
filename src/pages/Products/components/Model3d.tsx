@@ -14,7 +14,7 @@ function Model({
   percentRotation: number;
   modelUrl: string;
 }) {
-  const { scene } = useGLTF("/models/Опоры КХ ОСТ 36-146-88 Restailed.glb");
+  const { scene } = useGLTF(modelUrl);
 
   const clonedScene = useMemo(() => scene.clone(), [scene]);
   return (
@@ -58,11 +58,7 @@ export default function Model3d({
 
   return (
     <>
-      <ModelViewerModal
-        close={close}
-        opened={opened}
-        modelUrl={"/models/Опоры КХ ОСТ 36-146-88 Restailed.glb"}
-      />
+      <ModelViewerModal close={close} opened={opened} modelUrl={modelUrl} />
 
       <Box
         w={{ base: "100%", xs: "45%" }}

@@ -108,11 +108,12 @@ export default function ExecutionProduct() {
           </>
         )}
 
-        <Text fz={28} mb={20} fw="bold">
+        <Text fz={28} fw="bold">
           Исполнения
         </Text>
 
         <Box
+          py={20}
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))",

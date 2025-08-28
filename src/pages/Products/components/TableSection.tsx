@@ -8,7 +8,7 @@ import { TableProducts } from "../../../entities/TableProducts.interface";
 export default function TableSection() {
   const { BlueprintId, ExecutionId } = useParams();
 
-  const [data, setData] = useState<TableProducts | null>();
+  const [data, setData] = useState<TableProducts[]>([]);
   const [loading, setLoading] = useState(false);
   const [showSkeleton, setShowSkeleton] = useState(false);
   const [minDisplayTimePassed, setMinDisplayTimePassed] = useState(false);
@@ -46,7 +46,7 @@ export default function TableSection() {
         const remainingTime = Math.max(1000 - elapsedTime, 0);
 
         setTimeout(() => {
-          setData(null);
+          setData([]);
           setLoading(false);
           setShowSkeleton(false);
         }, remainingTime);
@@ -109,7 +109,8 @@ export default function TableSection() {
                 placeholder="Поиск по обозначению"
               />
             </Box>
-            <Table style={{}}>
+
+            <Table>
               <Table.Thead bg="#FBFBFB" style={{ border: "1px solid #D2D3D6" }}>
                 <Table.Tr>
                   <Table.Th>
