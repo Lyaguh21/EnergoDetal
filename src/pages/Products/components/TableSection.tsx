@@ -1,4 +1,12 @@
-import { Box, Input, ScrollArea, Skeleton, Table, Text } from "@mantine/core";
+import {
+  Box,
+  CloseButton,
+  Input,
+  LoadingOverlay,
+  Skeleton,
+  Table,
+  Text,
+} from "@mantine/core";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
@@ -17,6 +25,7 @@ export default function TableSection() {
   const [hasMore, setHasMore] = useState(true);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
+  const [searchRequest, setSearchRequest] = useState("");
   const limit = 10;
 
   const fetchData = async (pageNum: number, append = false) => {
@@ -35,7 +44,7 @@ export default function TableSection() {
       const startTime = Date.now();
 
       const response = await axios.post(
-        `${API}/products/${BlueprintId}/${ExecutionId}?page=${pageNum}&limit=${limit}`
+        `${API}/products/${BlueprintId}/${ExecutionId}?page=${pageNum}&limit=${limit}&qu=${searchRequest}`
       );
 
       const { data: newData, meta } = response.data;
@@ -53,7 +62,6 @@ export default function TableSection() {
           setData((prev) => [...prev, ...newData]);
         }
 
-        // Обновляем флаг hasMore
         if (meta.currentPage >= meta.totalPages) {
           setHasMore(false);
         } else {
@@ -75,8 +83,10 @@ export default function TableSection() {
   };
 
   useEffect(() => {
+    setPage(1);
+    setHasMore(true);
     fetchData(1, false);
-  }, [BlueprintId, ExecutionId]);
+  }, [BlueprintId, ExecutionId, searchRequest]);
 
   const handleScroll = (container: HTMLDivElement) => {
     if (loadingMore || !hasMore) return;
@@ -84,17 +94,22 @@ export default function TableSection() {
     const scrollTop = container.scrollTop;
     const scrollHeight = container.scrollHeight;
     const clientHeight = container.clientHeight;
-    console.log(
-      scrollTop,
-      scrollHeight,
-      clientHeight,
-      scrollHeight - scrollTop - clientHeight
-    );
+
     if (scrollHeight - scrollTop - clientHeight < 20) {
       const nextPage = page + 1;
       setPage(nextPage);
       fetchData(nextPage, true);
     }
+  };
+
+  const handleSearchChange = (value: string) => {
+    setSearchRequest(value);
+    setPage(1);
+  };
+
+  const handleClearSearch = () => {
+    setSearchRequest("");
+    setPage(1);
   };
 
   const rows = data.map((element: TableProducts, index) => (
@@ -129,31 +144,45 @@ export default function TableSection() {
       </Text>
 
       <Box px={20} py={20}>
-        {!showSkeleton && (
-          <>
+        <>
+          <Box
+            p={20}
+            style={{
+              border: "1px solid #D2D3D6",
+              borderTopLeftRadius: "8px",
+              borderTopRightRadius: "8px",
+            }}
+          >
+            <Input
+              size="sm"
+              w="100%"
+              bdrs={10}
+              value={searchRequest}
+              onChange={(event) => handleSearchChange(event.target.value)}
+              placeholder="Поиск по обозначению"
+              rightSectionPointerEvents="all"
+              rightSection={
+                <CloseButton
+                  aria-label="Clear input"
+                  onClick={handleClearSearch}
+                  style={{ display: searchRequest ? undefined : "none" }}
+                />
+              }
+            />
+          </Box>
+          {!showSkeleton && (
             <Box
-              p={20}
               style={{
+                overflowY: "scroll",
+                borderRadius: "0 0 8px 8px",
                 border: "1px solid #D2D3D6",
-                borderTopLeftRadius: "8px",
-                borderTopRightRadius: "8px",
+                borderTop: "0",
               }}
-            >
-              <Input
-                size="sm"
-                w="100%"
-                bdrs={10}
-                placeholder="Поиск по обозначению"
-              />
-            </Box>
-
-            <Box
-              style={{ overflowY: "scroll" }}
               h={395}
               onScrollCapture={(event) => handleScroll(event.currentTarget)}
               ref={scrollAreaRef}
             >
-              <Table withTableBorder classNames={{ table: classes.table }}>
+              <Table classNames={{ table: classes.table }}>
                 <Table.Thead bg="#FBFBFB">
                   <Table.Tr>
                     <Table.Th>
@@ -190,13 +219,32 @@ export default function TableSection() {
                       </Table.Td>
                     </Table.Tr>
                   )}
+
+                  {data.length === 0 && (
+                    <Table.Tr h="355px">
+                      <Table.Td colSpan={4} ta="center" py="xs">
+                        <Text c="dimmed" size="sm">
+                          Ничего не найдено
+                        </Text>
+                      </Table.Td>
+                    </Table.Tr>
+                  )}
                 </Table.Tbody>
               </Table>
             </Box>
-          </>
-        )}
+          )}
+        </>
 
-        {showSkeleton && <Skeleton bdrs={8} h="395px" w="100%" />}
+        {showSkeleton && (
+          <Skeleton style={{ borderRadius: "0 0 8px 8px" }} h="395px" w="100%">
+            <LoadingOverlay
+              color="indigo"
+              visible={showSkeleton}
+              zIndex={1000}
+              overlayProps={{ radius: "sm", blur: 2 }}
+            />
+          </Skeleton>
+        )}
       </Box>
     </>
   );
