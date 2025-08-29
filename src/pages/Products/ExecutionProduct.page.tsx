@@ -122,7 +122,9 @@ export default function ExecutionProduct() {
           }}
         >
           {!showSkeleton &&
-            data?.execution.map((el) => <ExecutionTemplate data={el} />)}
+            data?.execution.data.map((el, index) => (
+              <ExecutionTemplate data={el} key={index} />
+            ))}
 
           {showSkeleton &&
             [1, 2, 3].map((el) => (
