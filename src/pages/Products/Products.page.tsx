@@ -60,7 +60,12 @@ export default function Products() {
   }, []);
 
   return (
-    <Box w="100%" px={{ base: 20, md: 100 }} style={{ overflow: "hidden" }}>
+    <Box
+      w="100%"
+      h="100vh"
+      px={{ base: 20, md: 100 }}
+      style={{ overflow: "hidden" }}
+    >
       <MainBigText> Продукция</MainBigText>
 
       <Search />
