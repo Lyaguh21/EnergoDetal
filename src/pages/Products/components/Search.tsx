@@ -42,7 +42,7 @@ export default function Search() {
   useEffect(() => {
     axios
       .get(`${API}/search?qu=${searchRequest}`)
-      .then((res) => setData(res.data.slice(0, 10)))
+      .then((res) => setData(res.data))
       .catch((err) => console.error(err));
   }, [searchRequest]);
 
@@ -60,7 +60,7 @@ export default function Search() {
         value={searchRequest}
         onChange={(e) => setSearchRequest(e.target.value)}
         w="100%"
-        radius={active ? "8px 8px 0 0" : "8px"}
+        radius={searchRequest && active ? "8px 8px 0 0" : "8px"}
         size="xl"
         placeholder="Введите название или номер чертежа..."
         rightSectionPointerEvents="all"
@@ -76,7 +76,7 @@ export default function Search() {
           )
         }
       />
-      {active && (
+      {searchRequest && active && (
         <Stack
           w="100%"
           bg="white"
@@ -98,7 +98,7 @@ export default function Search() {
             <SearchItemTemplate el={el} key={index} />
           ))}
 
-          {data.length === 0 && (
+          {searchRequest && data.length === 0 && (
             <Flex px="10px" h="60" w="100%" align="center">
               <Text>Ничего не найдено...</Text>
             </Flex>

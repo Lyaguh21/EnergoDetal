@@ -127,7 +127,7 @@ export default function ExecutionProduct() {
             ))}
 
           {showSkeleton &&
-            [1, 2, 3].map((el) => (
+            [1, 2, 3, 4, 5, 6, 7, 8].map((el) => (
               <Skeleton radius="md" w="100%" h="450px" key={el} />
             ))}
         </Box>
