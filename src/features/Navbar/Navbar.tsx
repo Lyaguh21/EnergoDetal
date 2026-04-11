@@ -31,7 +31,7 @@ export default function Navbar({ ref }: { ref: any }) {
     >
       <Box w={320} h="100vh" className={classes.borderR} ref={ref}>
         <Flex p={20} gap={10} align="center" className={classes.borderB}>
-          <img src="/logo.svg" />ы
+          <img src="/logo.svg" />
           <Text fw="bold" fz={28}>
             Энергодеталь
           </Text>

@@ -21,7 +21,7 @@
 
 - **Backend**
   - NestJS
-  - MongoDB
+  - Postgres
   - Docker
 
 
