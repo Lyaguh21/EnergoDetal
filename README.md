@@ -1,5 +1,27 @@
-# Mantine + Vite + Vanilla extract template
+# EnergoDetal
 
-Get started with the template by clicking `Use this template` button on the top of the page.
+Коммерческий проект реализующий сайт для завода
 
-[Documentation](https://mantine.dev/styles/vanilla-extract/)
+## ✨ Функционал
+
+- Галерея для просмотра фотографий
+- Каталог для просмотра информации и 3d моделей
+- Адаптивный дизайн и другое
+
+## 🛠 Cтек
+
+- **Frontend**
+
+  - React + TypeScript
+  - MantineUI
+  - Zustand
+  - Motion
+  - React Router
+  - ReactThreeFriber
+
+- **Backend**
+  - NestJS
+  - MongoDB
+  - Docker
+
+
