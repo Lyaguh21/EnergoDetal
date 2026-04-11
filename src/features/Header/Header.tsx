@@ -24,7 +24,7 @@ export default function Header({
       <Flex gap={24} align="center">
         <img src="/LogoEnergoDetal.svg" />
         <Text fw="bold" fz={28}>
-          ООО “ТРУБЫ”
+          ООО Энергодеталь
         </Text>
       </Flex>
 

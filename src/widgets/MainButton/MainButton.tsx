@@ -1,12 +1,12 @@
-import { Button } from "@mantine/core";
-import { ButtonHTMLAttributes, ReactNode } from "react";
+import { Button, ButtonProps } from "@mantine/core";
+import { ReactNode } from "react";
 import styles from "./MainButton.module.css";
 
-interface MainButton extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface MainButtonProps extends ButtonProps {
   children: ReactNode;
 }
 
-export default function MainButton({ children, ...props }: MainButton) {
+export default function MainButton({ children, ...props }: MainButtonProps) {
   return (
     <Button {...props} className={styles.MainButton}>
       {children}

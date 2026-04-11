@@ -26,28 +26,28 @@ export default function Contacts() {
               <Text fz={32} fw="bold">
                 Адрес
               </Text>
-              <Text fz={24}>г. Шахты, ул. Промышленная, д. 1</Text>
+              <Text fz={24}>г. Шахты, ул. Неглинская, д. 5</Text>
             </Flex>
 
             <Flex direction="column">
               <Text fz={32} fw="bold">
                 Номер телефона
               </Text>
-              <Text fz={24}>+7 (918) 123-45-67</Text>
+              <Text fz={24}>+7 (863) 279-81-15</Text>
             </Flex>
 
             <Flex direction="column">
               <Text fz={32} fw="bold">
                 Почта
               </Text>
-              <Text fz={24}>trubi@contact.ru</Text>
+              <Text fz={24}>zakaz@shmze.ru</Text>
             </Flex>
 
             <Flex direction="column">
               <Text fz={32} fw="bold">
                 График работы
               </Text>
-              <Text fz={24}>Ежедневно: 8:00 - 22:00</Text>
+              <Text fz={24}>Пн-Пт: 8:00 - 17:00</Text>
             </Flex>
 
             <Flex pr={20} gap={12} direction="column">
@@ -66,7 +66,7 @@ export default function Contacts() {
                 >
                   Реквизиты
                 </Button>
-                <a download href="./Реквизиты.xlsx">
+                <a download href="./АНКЕТА КОНТРАГЕНТА.docx">
                   <Button
                     style={{ aspectRatio: "1 / 1" }}
                     className={classes.OutlineButton}

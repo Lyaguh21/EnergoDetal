@@ -23,17 +23,17 @@ export default function Navbar({ ref }: { ref: any }) {
       exit={{ x: -400 }}
       transition={{ type: "tween", duration: 0.3 }}
       style={{
-        position: "fixed",
+        position: "fixed", 
         height: "100vh",
         zIndex: "10",
         backgroundColor: "white",
       }}
     >
       <Box w={320} h="100vh" className={classes.borderR} ref={ref}>
-        <Flex p={20} gap={24} align="center" className={classes.borderB}>
-          <img src="/LogoEnergoDetal.svg" />
+        <Flex p={20} gap={10} align="center" className={classes.borderB}>
+          <img src="/logo.svg" />ы
           <Text fw="bold" fz={28}>
-            ООО “ТРУБЫ”
+            Энергодеталь
           </Text>
         </Flex>
 
@@ -46,14 +46,14 @@ export default function Navbar({ ref }: { ref: any }) {
           gap={5}
         >
           <a
-            href="mailto:trubi@gmai.ru?Subject=Оформление заказа&Body=Здравствуйте, заинтересовали ваши услуги. "
+            href="mailto:zakaz@shmze.ru?Subject=Оформление заказа&Body=Здравствуйте, заинтересовали ваши услуги. "
             style={{
               textDecoration: "underline",
               color: "#4e535d",
               fontSize: "22px",
             }}
           >
-            trubi@contact.ru
+            zakaz@shmze.ru
           </a>
           <a
             href="tel: +79181234567"
@@ -63,10 +63,10 @@ export default function Navbar({ ref }: { ref: any }) {
               fontSize: "22px",
             }}
           >
-            +7 (918) 123-45-67
+            +7 (863) 279-81-15
           </a>
 
-          <a href="mailto:trubi@gmai.ru?Subject=Оформление заказа&Body=Здравствуйте, заинтересовали ваши услуги. ">
+          <a href="mailto:zakaz@shmze.ru?Subject=Оформление заказа&Body=Здравствуйте, заинтересовали ваши услуги. ">
             <MainButton style={{ marginTop: "5px" }} color="white">
               Оставить заявку
             </MainButton>
