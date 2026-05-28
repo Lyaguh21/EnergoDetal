@@ -8,7 +8,7 @@ interface navbar {
 export default function NavGallery({ select, set }: navbar) {
   const buttons = [
     { title: "Продукция", type: "Products" },
-    { title: "Станки", type: "Machines" },
+    { title: "Оборудование", type: "Machines" },
     { title: "Производство", type: "Production" },
   ];
   return (

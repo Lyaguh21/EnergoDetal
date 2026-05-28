@@ -56,7 +56,7 @@ export default function Navbar({ ref }: { ref: any }) {
             zakaz@shmze.ru
           </a>
           <a
-            href="tel: +79181234567"
+            href="tel: +78632798115"
             style={{
               textDecoration: "underline",
               color: "#4e535d",

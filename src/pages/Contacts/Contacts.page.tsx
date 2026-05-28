@@ -14,7 +14,7 @@ export default function Contacts() {
     <>
       <RequisitesModal opened={openedRequisites} close={closeRequisites} />
       <DeliveryModal opened={openedDelivery} close={closeDelivery} />
-      <Box w="100%" px={{ base: 20, md: 100 }}>
+      <Box w="100%" px={{ base: 20, md: 30 }}>
         <MainBigText>Контакты</MainBigText>
         <Flex
           wrap={{ base: "wrap", xl: "nowrap" }}
@@ -24,7 +24,13 @@ export default function Contacts() {
           <Flex direction="column" w={{ base: "100%", md: "50%" }} gap={24}>
             <Flex direction="column">
               <Text fz={32} fw="bold">
-                Адрес
+                Адрес офиса:
+              </Text>
+              <Text fz={24}>
+                г. Ростов-на-Дону, пр-кт 40-летия Победы, д. 75
+              </Text>
+              <Text fz={32} fw="bold">
+                Адрес производства:
               </Text>
               <Text fz={24}>г. Шахты, ул. Неглинская, д. 5</Text>
             </Flex>
